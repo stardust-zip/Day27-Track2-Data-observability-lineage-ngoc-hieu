@@ -59,7 +59,9 @@ def write_summary(summary: dict[str, int | str], output_path: str | Path) -> Pat
     return output_file
 
 
-def send_discord_message(summary: dict[str, int | str], webhook_url: str = DISCORD_WEBHOOK_URL) -> None:
+def send_discord_message(
+    summary: dict[str, int | str], webhook_url: str = DISCORD_WEBHOOK_URL
+) -> None:
     if not webhook_url:
         return
 
@@ -74,7 +76,7 @@ def send_discord_message(summary: dict[str, int | str], webhook_url: str = DISCO
     http_request = request.Request(
         webhook_url,
         data=payload,
-        headers={"Content-Type": "application/json"},
+        headers={"Content-Type": "application/json", "User-Agent": "Mozilla/5.0"},
         method="POST",
     )
     with request.urlopen(http_request, timeout=15) as response:

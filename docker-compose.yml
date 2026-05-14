@@ -1,0 +1,19 @@
+services:
+  airflow-lab:
+    image: apache/airflow:2.8.1-python3.10
+    user: root # Runs as root to prevent permission errors when writing to output/
+    ports:
+      - "8027:8080"
+    volumes:
+      # Mounts your starter project folder to the Airflow home directory
+      - ./starter_project:/opt/airflow
+    env_file:
+      # Pulls in your Discord Webhook and Input File paths
+      - ./starter_project/.env
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - _AIRFLOW_DB_UPGRADE=True
+      - _AIRFLOW_WWW_USER_CREATE=True
+      - _AIRFLOW_WWW_USER_USERNAME=admin
+      - _AIRFLOW_WWW_USER_PASSWORD=admin
+    command: standalone

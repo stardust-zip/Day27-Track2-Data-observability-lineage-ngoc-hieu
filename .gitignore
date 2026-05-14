@@ -5,3 +5,10 @@ output/
 .env
 
 .direnv/
+
+# Airflow generated files
+starter_project/airflow-webserver.pid
+starter_project/airflow.cfg
+starter_project/airflow.db
+starter_project/logs/
+starter_project/webserver_config.py
