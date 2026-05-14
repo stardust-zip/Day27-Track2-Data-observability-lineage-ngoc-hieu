@@ -19,12 +19,16 @@ if str(PROJECT_ROOT) not in sys.path:
 
 
 def validate_orders_task() -> dict:
-    return run_lab_check(
+    from src.config import AIRFLOW_INPUT_FILE, SUMMARY_FILE
+    from src.validation import run_lab_check
+
+    summary = run_lab_check(
         input_path=AIRFLOW_INPUT_FILE,
         output_path=SUMMARY_FILE,
         allow_failure=False,
         skip_discord=False,
     )
+    return summary
 
 
 if DAG is not None:
