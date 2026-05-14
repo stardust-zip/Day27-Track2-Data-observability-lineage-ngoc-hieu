@@ -4,6 +4,9 @@ from datetime import datetime
 from pathlib import Path
 import sys
 
+from src.config import AIRFLOW_INPUT_FILE, SUMMARY_FILE
+from src.validation import run_lab_check
+
 try:
     from airflow import DAG
     from airflow.operators.python import PythonOperator
@@ -16,16 +19,12 @@ if str(PROJECT_ROOT) not in sys.path:
 
 
 def validate_orders_task() -> dict:
-    """
-    TODO:
-    1. Import config values.
-    2. Read the input CSV.
-    3. Validate the rows.
-    4. Write the JSON summary.
-    5. Send the Discord alert.
-    6. Raise an error on failed validation.
-    """
-    raise NotImplementedError
+    return run_lab_check(
+        input_path=AIRFLOW_INPUT_FILE,
+        output_path=SUMMARY_FILE,
+        allow_failure=False,
+        skip_discord=False,
+    )
 
 
 if DAG is not None:
