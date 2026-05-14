@@ -1,0 +1,22 @@
+[project]
+name = "sales-data-quality-lab"
+version = "0.1.0"
+description = "Sales Data Quality Lab — Apache Airflow data observability and lineage exercise"
+requires-python = ">=3.13"
+dependencies = [
+    "apache-airflow>=2.8",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+
+[tool.black]
+line-length = 100
+target-version = ["py313"]
+
+[tool.basedpyright]
+pythonVersion = "3.13"
